@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b1b5b2821e1ceaa4295a441c1d61fd4f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - imageUp: {instanceID: 0}
+  - imageDown: {instanceID: 0}
+  - imageLeft: {instanceID: 0}
+  - imageRight: {instanceID: 0}
+  - imageSuccess: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
