@@ -206,9 +206,11 @@ MonoBehaviour:
   attack: {fileID: 310536832}
   moveSpeed: 5
   jumpForce: 250
-  rush: 20
+  Rush_time: 0.7
+  rush_F: 10
   isJumping: 0
-  isRush: 0
+  isRush_F: 0
+  isRush_B: 0
 --- !u!70 &310536826
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -352,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310536824}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.23, y: -0.53, z: 0}
+  m_LocalPosition: {x: 4.76, y: -0.38, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1571,7 +1573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062880981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.22, y: 0.08, z: 0}
+  m_LocalPosition: {x: 7.64, y: 0.36, z: 0}
   m_LocalScale: {x: 1.5111274, y: 3.2637, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

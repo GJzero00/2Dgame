@@ -8,9 +8,9 @@ public class Attack : MonoBehaviour
    private Rigidbody2D rb;
    private Animator animator;
 
-   public float attackCooldown = 2f;  // 攻擊冷卻時間，單位為秒
-   private float cooldownTimer = 0f;  // 冷卻時間計時器
-   public bool isAttacking = false;  // 是否正在攻擊
+   public float attackCooldown = 2f;  // Attack cooldown time, in seconds
+   private float cooldownTimer = 0f;  // cooldown timer
+   public bool isAttacking = false;  // is attacking
    
 
     public const int Key_Up = 0;    
@@ -26,9 +26,9 @@ public class Attack : MonoBehaviour
     
     int[,]Sample =
     {
-        //上(W)+攻擊(J)
+        //Up(W)+Attack(J)
         { Key_Up ,Key_Attack },
-        //下(S)+攻擊(J)
+        //Down(S)+Attack(J)
         { Key_Down,Key_Attack },
     };
       
@@ -99,22 +99,26 @@ public class Attack : MonoBehaviour
         }
       if (isAttacking)
         {
-            // 如果正在攻擊，則啟動冷卻時間計時器
+            // If attacking, start cooldown timer
             cooldownTimer += Time.deltaTime;
 
             if (cooldownTimer >= attackCooldown)
             {
-                // 冷卻時間結束，允許再次攻擊
+                // The cooldown expires, allowing another attack
                 isAttacking = false;
                 cooldownTimer = 0f;
             }
         }
-      /* if (isSuccess && !isAttacking)
+       if (isSuccess && !isAttacking)
         {  
           animator.SetTrigger("IsTopCut");
           isAttacking = true;
         }
-        
+        else if(Input.GetKeyDown (KeyCode.J) && !isAttacking)
+        {
+          animator.SetTrigger("IsMiddleCut");
+          isAttacking = true;
+        }
         else if (isSuccess && !isAttacking)
         {
           animator.SetTrigger("IsDownCut");
@@ -124,11 +128,8 @@ public class Attack : MonoBehaviour
         {
             isSuccess = false;
         }
-          */
-      if (isSuccess && !isAttacking)
-        {
-            Debug.Log("123");
-        }
+          
+     
     }
     void Reset ()    
      {    

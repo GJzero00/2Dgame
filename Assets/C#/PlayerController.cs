@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed;
     public float jumpForce = 5f;
-    public float rush = 20f;
+    public float Rush_time ;
+    public float rush_F = 20f;
     public bool isJumping = false;
-    public bool isRush = false;
+    public bool isRush_F = false;
+    public bool isRush_B = false;
     private Transform PlayerTwo_x;
     private GameObject PlayerTwo;
 
@@ -24,14 +26,15 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         PlayerTwo= GameObject.Find("playerTwo");
         PlayerTwo_x = PlayerTwo.GetComponent<Transform>();
+        
     }
 
     void Update()
     {
-       
+        
         Move();
         
-        // 角色跳躍
+        // role jump
         if (Input.GetButtonDown("Jump") && !isJumping)
         {
             anim.SetBool("Jump",true);
@@ -40,10 +43,10 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-
+   
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 角色碰撞地面時重置跳躍狀態
+        // Reset jump state when character hits the ground
         if (collision.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
@@ -57,16 +60,58 @@ public class PlayerController : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
         anim.SetFloat("Blend", Mathf.Abs(moveX));
-        //翻轉
+        //turn over
         if ((Mathf.Abs(PlayerTwo_x.position.x) > Mathf.Abs(transform.position.x)))
         {
-          
             transform.localScale = new Vector3(2, 2, 2);
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D))
+            {
+                anim.SetBool("CanRush_F",true);
+                rb.velocity = new Vector2(moveX * rush_F, rb.velocity.y);
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.A))
+            {
+                anim.SetBool("CanRush_B",true);
+                StartCoroutine(Rush_F());
+            }
+            else
+            {
+                anim.SetBool("CanRush_F",false);
+                anim.SetBool("CanRush_B",false);
+            }
+            
+            
         }
         else 
         {
             transform.localScale = new Vector3(-2, 2, 2);
+            if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.D))
+            {
+                anim.SetBool("CanRush_B",true);
+                StartCoroutine(Rush_B());
+            }
+            else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A))
+            {
+                anim.SetBool("CanRush_F",true);
+                rb.velocity = new Vector2(moveX * rush_F, rb.velocity.y);
+            }
+            else
+            {
+                anim.SetBool("CanRush_F",false);
+                anim.SetBool("CanRush_B",false);
+            }
         }
     }
    
+   IEnumerator Rush_F() 
+    {
+        yield return new WaitForSeconds(Rush_time);
+        transform.position = new Vector2(transform.position.x-2 ,transform.position.y);
+    }
+     IEnumerator Rush_B() 
+    {
+        yield return new WaitForSeconds(Rush_time);
+        transform.position = new Vector2(transform.position.x+2 ,transform.position.y);
+    }
 }
+
